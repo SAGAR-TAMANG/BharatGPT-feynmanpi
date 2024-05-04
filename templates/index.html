@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block styles %}
+<style>
+  #chat {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  body {
+    height: 100vh;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-light border-bottom" aria-label="Tenth navbar example">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Docs</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Other</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<main>
+  <section id="chat">
+    <div class="w-50">
+      <div class="container">
+        <div>
+          <div class="card p-4 m-5">
+            <h1 class="fs-3">Welcome to BharatGPT</h1>
+            <p class="text-secondary">
+              India's answer to the LLM Revolution. 
+              <br>
+              It is built under the Gemini AI, released with the banner of Feynman Pi. Learn more here at the Docs.
+            </p>
+          </div>
+        </div>
+        
+        <div>
+          <div class="m-5 row">
+            <div class="col-6 p-1">
+              <div class="card p-3">
+                <h1 class="fs-6">Tell me a</h1>
+                <p class="fs-6 m-0">simple joke about a bunch of cats.</p>
+              </div>
+            </div>
+            <div class="col-6 p-1">
+              <div class="card p-3">
+                <h1 class="fs-6">Tell me a</h1>
+                <p class="fs-6 m-0">simple joke about a bunch of cats.</p>
+              </div>
+            </div>
+            <div class="col-6 p-1">
+              <div class="card p-3">
+                <h1 class="fs-6">Tell me a</h1>
+                <p class="fs-6 m-0">simple joke about a bunch of cats.</p>
+              </div>
+            </div>
+            <div class="col-6 p-1">
+              <div class="card p-3">
+                <h1 class="fs-6">Tell me a</h1>
+                <p class="fs-6 m-0">simple joke about a bunch of cats.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="m-5" style="transform: ">
+            <form>
+                <div class="input-group w-auto">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Send a message"
+                      aria-label="Send a message"
+                      aria-describedby="button-addon1"
+                    />
+                    <button class="btn btn-secondary" type="button" id="button-addon1">
+                        Submit
+                    </button>
+                </div>
+              </form>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
