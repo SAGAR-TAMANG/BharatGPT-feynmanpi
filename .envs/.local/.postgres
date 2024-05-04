@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=bharatgpt
+POSTGRES_USER=jkgxjKeabirEsmmVGQGMYQXaXLucIncW
+POSTGRES_PASSWORD=9BcrY6KSnCWkeHKj1hSFob8G3cEkAOhkrvjfDxguP3V8vioSYwfaZkpEQr2ZAMJh
