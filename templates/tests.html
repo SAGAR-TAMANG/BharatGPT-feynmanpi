@@ -7,7 +7,7 @@
     <div id="chat_messages">
       
     </div>
-    <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" hx-indicator="loading">
+    <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" hx-indicator="#loading">
       {% csrf_token %}
       <div class="input-group w-auto">
         <input

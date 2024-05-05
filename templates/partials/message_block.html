@@ -7,20 +7,21 @@
         {% include 'partials/chat_blob.html' %}
       </div>
       <div class="position-fixed chat-width bottom-0">
-        <div class="mx-5 m-4">
-          <div class="htmx-indicator" id="loading">
-            Loading...
+        <div class="m-3 m-sm-5 mb-sm-2">
+          <div class="loading2 htmx-indicator d-flex justify-content-center" id="loading2">
+            <img src="{% static 'img/loading2.gif' %}" alt="" height="40px">
           </div>
-          <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" hx-indicitor="loading">
+          <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'}); document.getElementById('message_input2').value=''; console.log('pressed')" hx-indicator="#loading2">
             {% csrf_token %}
             <div class="input-group w-auto">
               <input
-                type="text"
-                name="message"
-                class="form-control p-3"
-                placeholder="Send a message"
-                aria-label="Send a message"
-                aria-describedby="button-addon1"
+              type="text"
+              name="message"
+              class="form-control p-3"
+              placeholder="Send a message"
+              aria-label="Send a message"
+              aria-describedby="button-addon1"
+              id="message_input2"
               />
               <button class="btn bg-secondary" type="submit" id="button-addon1">
                 <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
@@ -59,8 +60,11 @@
         </div>
         
         <div id="form_div">
-          <div class="m-1 m-sm-5 mb-sm-2">
-            <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block1" hx-swap="outerHTML">
+          <div class="m-3 m-sm-5 mb-sm-2">
+            <div class="loading1 htmx-indicator d-flex justify-content-center" id="loading1">
+              <img src="{% static 'img/loading2.gif' %}" alt="" height="60px">
+            </div>
+            <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block1" hx-swap="outerHTML" hx-indicator="#loading1">
               {% csrf_token %}
               <div class="input-group w-auto">
                 <input
@@ -77,9 +81,9 @@
                 </button>
               </div>
             </form>
-            <div class="text-secondary fs-7 text-center mt-2">
+            <span class="text-secondary fs-7 text-center mt-2">
               BharatGPT can make mistakes and may not be perfect. Please use it responsibly.
-            </div>
+            </span>
           </div>
         </div>
       </div>
