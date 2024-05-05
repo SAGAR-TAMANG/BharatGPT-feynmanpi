@@ -1,0 +1,27 @@
+{% load static %}
+
+{% for chat in chat %}
+  {% if forloop.counter|divisibleby:2 %}
+  <div class="py-4 px-3 border-bottom d-flex align-items-top">
+    <img src="{% static 'img/pi.jpg' %}" style="width: 30px; height: 30px;" class="me-3" alt="user-avatar">
+    <p class="text-secondary p-0 m-0">
+      <span class="fw-bold">
+        {{ chat.sender }}
+      </span>
+      <br>
+      {{ chat.message }}
+    </p>
+  </div>
+  {% else %}
+  <div class="py-4 px-3 border-bottom d-flex align-items-top">
+    <img src="{% static 'img/default-profile.jpg' %}" style="width: 30px; height: 30px;" class="me-3" alt="user-avatar">
+    <p class="text-secondary p-0 m-0">
+      <span class="fw-bold">
+        {{ chat.sender }}
+      </span>
+      <br>
+      {{ chat.message }}
+    </p>
+  </div>
+  {% endif %}
+{% endfor %}

@@ -1,38 +1,17 @@
 {% load static %}
 
 {% if chat %}
-  <div id="message_block">
-    <div class="d-flex justify-content-center mt-3" id="message_block_2">
-      <div class="chat-width" style="padding-bottom:6rem">
-      {% for chat in chat %}
-        {% if forloop.counter|divisibleby:2 %}
-        <div class="py-4 px-3 border-bottom d-flex align-items-top">
-          <img src="{% static 'img/pi.jpg' %}" style="width: 30px; height: 30px;" class="me-3" alt="user-avatar">
-          <p class="text-secondary p-0 m-0">
-            <span class="fw-bold">
-              {{ chat.sender }}
-            </span>
-            <br>
-            {{ chat.message }}
-          </p>
-        </div>
-        {% else %}
-        <div class="py-4 px-3 border-bottom d-flex align-items-top">
-          <img src="{% static 'img/default-profile.jpg' %}" style="width: 30px; height: 30px;" class="me-3" alt="user-avatar">
-          <p class="text-secondary p-0 m-0">
-            <span class="fw-bold">
-              {{ chat.sender }}
-            </span>
-            <br>
-            {{ chat.message }}
-          </p>
-        </div>
-        {% endif %}
-        {% endfor %}
+  <div>
+    <div class="d-flex justify-content-center mt-3" id="message_block2">
+      <div class="chat-width" style="padding-bottom:6rem" id="chat_messages">
+        {% include 'partials/chat_blob.html' %}
       </div>
       <div class="position-fixed chat-width bottom-0">
         <div class="mx-5 m-4">
-          <form method="POST" hx-post="{% url 'index' %}" target="#message_block_2" hx-swap="beforeend">
+          <div class="htmx-indicator" id="loading">
+            Loading...
+          </div>
+          <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" hx-indicitor="loading">
             {% csrf_token %}
             <div class="input-group w-auto">
               <input
@@ -53,7 +32,7 @@
     </div>
   </div>
 {% else %}
-  <div id="message_block">
+  <div id="message_block1">
     <div class="d-flex justify-content-center">
       <div class="position-fixed chat-width">
         <div class="card p-4 m-5">
@@ -70,7 +49,7 @@
           {% for cards_bold, cards_normal in zipped %}
           <div class="col-6 p-1">
             <a href="#" class="text-decoration-none">
-              <div class="card p-3">
+              <div class="card p-3 card-link" data-bold="{{ cards_bold }}" data-normal="{{ cards_normal }}">
                 <h1 class="fs-7">{{ cards_bold }}</h1>
                 <p class="fs-7 m-0 truncate">{{ cards_normal }}</p>
               </div>
@@ -80,7 +59,7 @@
         </div>
         
         <div class="mx-5 m-4">
-          <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block" hx-swap="outerHTML">
+          <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block1" hx-swap="outerHTML">
             {% csrf_token %}
             <div class="input-group w-auto">
               <input
@@ -90,6 +69,7 @@
                 placeholder="Send a message"
                 aria-label="Send a message"
                 aria-describedby="button-addon1"
+                id="message_input"
               />
               <button class="btn bg-secondary" type="submit" id="button-addon1">
                 <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
@@ -100,4 +80,26 @@
       </div>
     </div>
   </div>
+  {% block scripts %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log("Hello World")
+      var cardLinks = document.querySelectorAll('.card-link');
+    
+      cardLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+          event.preventDefault();
+          var boldText = link.dataset.bold;
+          var normalText = link.dataset.normal;
+          var message = boldText + " " + normalText;
+    
+          console.log('Message:', message);
+          document.getElementById('message_input').value = message;
+          document.getElementById('button-addon1').click();
+        });
+      });
+    });
+  </script>
+{% endblock %}
 {% endif %}
+

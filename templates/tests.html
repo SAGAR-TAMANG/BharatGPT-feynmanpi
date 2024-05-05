@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<main>
+  <section id="chat">
+    <div id="chat_messages">
+      
+    </div>
+    <div class="htmx-indicator" id="loading" class="text-black fs-1">
+      Loading...
+    </div>    
+    <form method="POST" hx-post="{% url 'chatBharatGPT' %}" hx-target="#chat_messages" hx-swap="innerHTML scroll:bottom" hx-on::after-request="window.scrollTo({top: document.body.scrollHeight, behavior: 'smooth'})" hx-indicator="loading">
+      {% csrf_token %}
+      <div class="input-group w-auto">
+        <input
+          type="text"
+          name="message"
+          class="form-control p-3"
+          placeholder="Send a message"
+          aria-label="Send a message"
+          aria-describedby="button-addon1"
+        />
+        <button class="btn bg-secondary" type="submit" id="button-addon1">
+          <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
+        </button>
+      </div>
+    </form>
+
+  </section>
+</main>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+</script>
+
+{% endblock %}

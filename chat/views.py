@@ -85,6 +85,7 @@ cards = [
 
 def index(request):
   if request.htmx:
+    print("\n\nINDEX FUNCTION RUNNING\n\n")
     print("HTMX")
     print("POST:\n", request.POST)
     message = request.POST['message']
@@ -117,6 +118,8 @@ def index(request):
     }
 
     print("Context: \n", context)
+    # return render(request, 'partials/message_block.html', context=context)
+    # If it's the first request, render messages.html
     return render(request, 'partials/message_block.html', context=context)
   
   cards_bold, cards_normal = card_choser()
@@ -130,6 +133,45 @@ def index(request):
   print(context)
   
   return render(request, 'index.html', context=context)
+
+def chat_blob(request):
+  print("\n\nCHAT BLOB FUNCTION RUNNING\n\n")
+  if request.htmx:
+    print("HTMX")
+    print("POST:\n", request.POST)
+    message = request.POST['message']
+    
+    # Get or create the chat session for the current session
+    session_key = request.session.session_key
+    chat_session_key = f'chat_session_{session_key}'
+    chat_session = cache.get(chat_session_key)
+    if chat_session is None:
+        chat_session = []
+        cache.set(chat_session_key, chat_session)
+
+    # Add user message to the chat session
+    sender = request.user.username if request.user.is_authenticated else "Anonymous"
+    chat_session.append((sender, message))
+    cache.set(chat_session_key, chat_session)
+
+    # Get the AI response
+    ai_response = bharatGPT(message)
+
+    # Add AI response to the chat session
+    chat_session.append(("BharatGPT", ai_response))
+    cache.set(chat_session_key, chat_session)
+
+    # Extract usernames and messages separately for the frontend
+    chat_messages = [{'sender': sender, 'message': message} for sender, message in chat_session]
+
+    context = {
+        'chat': chat_messages
+    }
+
+    print("Context: \n", context)
+    # return render(request, 'partials/message_block.html', context=context)
+    # If it's the first request, render messages.html
+    return render(request, 'partials/chat_blob.html', context=context)
 
 def card_choser():
   chosen = random.sample(cards, 4)
@@ -159,3 +201,6 @@ def bharatGPT(message):
 
     print(response.text)
     return response.text
+
+def test(request):
+   return render(request, 'tests.html')
