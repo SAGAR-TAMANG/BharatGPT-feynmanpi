@@ -1,0 +1,17 @@
+.text-ai {
+  background: linear-gradient(to bottom, #004ab9, #219bff, #6fd6ff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.text-ai-2 {
+  background: linear-gradient(to right, #4e82ee, #9b72ca, #d96570);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+/* 
+.text-ai-2 {
+  background: linear-gradient(to right, #37c6ff, #a35af7, #d96570);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+} */
