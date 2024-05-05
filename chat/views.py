@@ -1,6 +1,14 @@
 from django.shortcuts import render
 import random
-from .models import ChatMessage, ChatSession
+from django.core.cache import cache
+
+from dotenv import load_dotenv 
+import google.generativeai as genai
+import os
+
+load_dotenv()
+google_gemini_key = os.getenv("GOOGLE_GEMINI")
+
 
 cards = [
   "Write a Python script#to automate sending daily email reports",
@@ -78,13 +86,37 @@ cards = [
 def index(request):
   if request.htmx:
     print("HTMX")
-    message = request.POST['message']
     print("POST:\n", request.POST)
-    print("MESSAGE:\n", message)
+    message = request.POST['message']
     
+    # Get or create the chat session for the current session
+    session_key = request.session.session_key
+    chat_session_key = f'chat_session_{session_key}'
+    chat_session = cache.get(chat_session_key)
+    if chat_session is None:
+        chat_session = []
+        cache.set(chat_session_key, chat_session)
+
+    # Add user message to the chat session
+    sender = request.user.username if request.user.is_authenticated else "Anonymous"
+    chat_session.append((sender, message))
+    cache.set(chat_session_key, chat_session)
+
+    # Get the AI response
+    ai_response = bharatGPT(message)
+
+    # Add AI response to the chat session
+    chat_session.append(("BharatGPT", ai_response))
+    cache.set(chat_session_key, chat_session)
+
+    # Extract usernames and messages separately for the frontend
+    chat_messages = [{'sender': sender, 'message': message} for sender, message in chat_session]
+
     context = {
-       'chat': 'heyyyy'
+        'chat': chat_messages
     }
+
+    print("Context: \n", context)
     return render(request, 'partials/message_block.html', context=context)
   
   cards_bold, cards_normal = card_choser()
@@ -111,3 +143,19 @@ def card_choser():
       normal_texts.append(parts[1])
 
   return bold_texts, normal_texts
+
+def bharatGPT(message):
+    genai.configure(api_key=google_gemini_key)
+    model = genai.GenerativeModel('gemini-pro')
+
+    chat = model.start_chat(history=[])
+
+    prompt = f'''
+    User: {message}
+    BharatGPT:
+    ''' 
+
+    response = chat.send_message(prompt)
+
+    print(response.text)
+    return response.text
