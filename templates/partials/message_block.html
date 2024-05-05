@@ -1,0 +1,95 @@
+{% if chat %}
+<div id="message_block">
+  <div class="d-flex justify-content-center">
+    <div class="position-fixed chat-width">
+      <div class="card p-4 border-bottom mt-3">
+        <p class="text-secondary">
+        Hey, what is the price of this?
+      </p>
+    </div>
+  </div>
+  <div class="position-fixed chat-width bottom-0">
+    <div class="m-5 row">
+      {% for cards_bold, cards_normal in zipped %}
+      <div class="col-6 p-1">
+        <a href="#" class="text-decoration-none">
+          <div class="card p-3">
+            <h1 class="fs-7">{{ cards_bold }}</h1>
+            <p class="fs-7 m-0 truncate">{{ cards_normal }}</p>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    
+    <div class="m-5">
+      <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block" hx-swap="outerHTML">
+        {% csrf_token %}
+        <div class="input-group w-auto">
+          <input
+            type="text"
+            name="message"
+            class="form-control p-3"
+            placeholder="Send a message"
+            aria-label="Send a message"
+            aria-describedby="button-addon1"
+          />
+          <button class="btn bg-secondary" type="submit" id="button-addon1">
+            <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</div>
+
+{% else %}
+<div id="message_block">
+  <div class="d-flex justify-content-center">
+    <div class="position-fixed chat-width">
+      <div class="card p-4 m-5">
+        <h1 class="fs-3">Welcome to <span class="text-ai-2">BharatGPT</span></h1>
+        <p class="text-secondary">
+          India's answer to the LLM Revolution. 
+          <br>
+          It is built under the Gemini AI, released with the banner of Feynman Pi. Learn more here at the Docs.
+        </p>
+      </div>
+    </div>
+    <div class="position-fixed chat-width bottom-0">
+      <div class="m-5 row">
+        {% for cards_bold, cards_normal in zipped %}
+        <div class="col-6 p-1">
+          <a href="#" class="text-decoration-none">
+            <div class="card p-3">
+              <h1 class="fs-7">{{ cards_bold }}</h1>
+              <p class="fs-7 m-0 truncate">{{ cards_normal }}</p>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      
+      <div class="m-5">
+        <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block" hx-swap="outerHTML">
+          {% csrf_token %}
+          <div class="input-group w-auto">
+            <input
+              type="text"
+              name="message"
+              class="form-control p-3"
+              placeholder="Send a message"
+              aria-label="Send a message"
+              aria-describedby="button-addon1"
+            />
+            <button class="btn bg-secondary" type="submit" id="button-addon1">
+              <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

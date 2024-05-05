@@ -1,5 +1,6 @@
 from django.shortcuts import render
 import random
+from .models import ChatMessage, ChatSession
 
 cards = [
   "Write a Python script#to automate sending daily email reports",
@@ -75,6 +76,13 @@ cards = [
 ]
 
 def index(request):
+  if request.htmx:
+    print("HTMX")
+    context = {
+       'chat': 'heyyyy'
+    }
+    return render(request, 'partials/message_block.html', context=context)
+  
   cards_bold, cards_normal = card_choser()
 
   context = {
