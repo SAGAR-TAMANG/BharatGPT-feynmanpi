@@ -101,6 +101,7 @@ def index(request):
       print("\n\n SESSIONS NOT CLEARED \n\n")
       print(e)
     chat_session = cache.get(chat_session_key)
+    
     if chat_session is None:
         chat_session = []
         cache.set(chat_session_key, chat_session)
@@ -161,8 +162,15 @@ def chat_blob(request):
     chat_session.append((sender, message))
     cache.set(chat_session_key, chat_session)
 
+    chat_messages = [message for sender, message in chat_session]
+
+    print("\n\nThis is the output:\n\n", chat_session)
+
+    # Create History
+    history = history_creator(chat_session)
+
     # Get the AI response
-    ai_response = bharatGPT(message)
+    ai_response = bharatGPT(message, history=[])
 
     # Add AI response to the chat session
     chat_session.append(("BharatGPT", ai_response))
@@ -193,11 +201,33 @@ def card_choser():
 
   return bold_texts, normal_texts
 
-def bharatGPT(message):
+# Generative Non-Chat Model
+
+# def bharatGPT(message, history=[]):
+#     genai.configure(api_key=google_gemini_key)
+#     model = genai.GenerativeModel('gemini-pro')
+#     messages = []
+#     messages.append({'role':'user', 'parts': ["From now onwards, I have given you a name called 'BharatGPT'. You are to use this name wherever you go."]})
+#     messages = [
+#         {'role':'user', 'parts': [message]}
+#     ]
+#     response = model.generate_content(messages)
+
+#     messages.append({'role':'model', 'parts':[response.text]})
+
+#     return response.text
+
+# Chat Model
+
+def bharatGPT(message, history=[]):
     genai.configure(api_key=google_gemini_key)
     model = genai.GenerativeModel('gemini-pro')
 
-    chat = model.start_chat(history=[])
+    history = [parts { text: "\n    User: what are you?\n    BharatGPT:\n    "} role: "user"
+      , parts {text: "I am a large language model, trained by Google."}role: "model"]
+
+    
+    chat = model.start_chat(history=history)
 
     prompt = f'''
     User: {message}
@@ -207,7 +237,13 @@ def bharatGPT(message):
     response = chat.send_message(prompt)
 
     print(response.text)
+    print(chat.history)
     return response.text
+
+def history_creator(history):
+  print("\nHISTORY\n", history)
+  
+
 
 def test(request):
    return render(request, 'tests.html')
