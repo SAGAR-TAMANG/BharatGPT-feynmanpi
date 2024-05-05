@@ -30,9 +30,24 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  #form_div {
+    margin: auto;
+    width: 100%;
+  }
+  @media (max-width: 572px) {
+    #card-1 {
+      display: none;
+    }
+    #card-2 {
+      display: none;
+    }
+  }
   @media (min-width: 992px) {
     .chat-width {
       width: 50%;
+    }
+    #form_div {
+      width: auto;
     }
   }
 </style>

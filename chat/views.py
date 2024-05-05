@@ -89,10 +89,17 @@ def index(request):
     print("HTMX")
     print("POST:\n", request.POST)
     message = request.POST['message']
+
     
     # Get or create the chat session for the current session
     session_key = request.session.session_key
     chat_session_key = f'chat_session_{session_key}'
+    try:
+      print("\n\n SESSIONS CLEARED \n\n")
+      cache.delete(chat_session_key)
+    except Exception as e:
+      print("\n\n SESSIONS NOT CLEARED \n\n")
+      print(e)
     chat_session = cache.get(chat_session_key)
     if chat_session is None:
         chat_session = []

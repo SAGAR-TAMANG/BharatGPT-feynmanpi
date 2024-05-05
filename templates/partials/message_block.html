@@ -35,7 +35,7 @@
   <div id="message_block1">
     <div class="d-flex justify-content-center">
       <div class="position-fixed chat-width">
-        <div class="card p-4 m-5">
+        <div class="card p-4 m-2 m-sm-5">
           <h1 class="fs-3">Welcome to <span class="text-ai-2">BharatGPT</span></h1>
           <p class="text-secondary">
             India's answer to the LLM Revolution. 
@@ -45,9 +45,9 @@
         </div>
       </div>
       <div class="position-fixed chat-width bottom-0">
-        <div class="m-5 row">
+        <div class="m-2 m-sm-5 row">
           {% for cards_bold, cards_normal in zipped %}
-          <div class="col-6 p-1">
+          <div class="col-12 col-sm-6 p-1" id="card-{{ forloop.counter }}">
             <a href="#" class="text-decoration-none">
               <div class="card p-3 card-link" data-bold="{{ cards_bold }}" data-normal="{{ cards_normal }}">
                 <h1 class="fs-7">{{ cards_bold }}</h1>
@@ -58,24 +58,29 @@
           {% endfor %}
         </div>
         
-        <div class="mx-5 m-4">
-          <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block1" hx-swap="outerHTML">
-            {% csrf_token %}
-            <div class="input-group w-auto">
-              <input
-                type="text"
-                name="message"
-                class="form-control p-3"
-                placeholder="Send a message"
-                aria-label="Send a message"
-                aria-describedby="button-addon1"
-                id="message_input"
-              />
-              <button class="btn bg-secondary" type="submit" id="button-addon1">
-                <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
-              </button>
+        <div id="form_div">
+          <div class="m-1 m-sm-5 mb-sm-2">
+            <form method="POST" hx-post="{% url 'index' %}" hx-target="#message_block1" hx-swap="outerHTML">
+              {% csrf_token %}
+              <div class="input-group w-auto">
+                <input
+                  type="text"
+                  name="message"
+                  class="form-control p-3"
+                  placeholder="Send a message"
+                  aria-label="Send a message"
+                  aria-describedby="button-addon1"
+                  id="message_input"
+                />
+                <button class="btn bg-secondary" type="submit" id="button-addon1">
+                  <i class="fa-solid fa-circle-arrow-up fa-xl text-white"></i>
+                </button>
+              </div>
+            </form>
+            <div class="text-secondary fs-7 text-center mt-2">
+              BharatGPT can make mistakes and may not be perfect. Please use it responsibly.
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
