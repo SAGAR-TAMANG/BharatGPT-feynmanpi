@@ -78,6 +78,10 @@ cards = [
 def index(request):
   if request.htmx:
     print("HTMX")
+    message = request.POST['message']
+    print("POST:\n", request.POST)
+    print("MESSAGE:\n", message)
+    
     context = {
        'chat': 'heyyyy'
     }
