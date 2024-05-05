@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-o-2mrd635jfoxcbszuvtn#*zj%=jz0g3u*$z+$t*^k1fd_p4ho
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["bharatgpt.feynmanpi.com", "localhost"]
 
 
 # Application definition
