@@ -67,7 +67,9 @@
 
 (#about-the-project)
 
-This project aims to scrape job listings from Naukri.com using Selenium.
+This project aims to create a world-class standard GPT app personalized for the Indian community.
+
+A lack of development in GPT Apps prompted us to create one ourselves.
 
 Contributions are welcome! Please see the [Contributing](#contributing) section to get started.
 
