@@ -1,4 +1,5 @@
 {% load static %}
+{% load bold %}
 
 {% for chat in chat %}
   {% if forloop.counter|divisibleby:2 %}
@@ -9,7 +10,7 @@
         {{ chat.sender }}
       </span>
       <br>
-      {{ chat.message | safe }}
+      {{ chat.message|linebreaksbr|bold|safe }}
     </p>
   </div>
   {% else %}
@@ -20,7 +21,7 @@
         {{ chat.sender }}
       </span>
       <br>
-      {{ chat.message | safe }}
+      {{ chat.message|linebreaksbr }}
     </p>
   </div>
   {% endif %}

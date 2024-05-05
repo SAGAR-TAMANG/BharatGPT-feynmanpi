@@ -223,13 +223,13 @@ def bharatGPT(message, history=[]):
     genai.configure(api_key=google_gemini_key)
     model = genai.GenerativeModel('gemini-pro')
 
-    history = [parts { text: "\n    User: what are you?\n    BharatGPT:\n    "} role: "user"
-      , parts {text: "I am a large language model, trained by Google."}role: "model"]
+    history = []
 
     
     chat = model.start_chat(history=history)
 
     prompt = f'''
+    BharatGPT is India's first Large Language Model (LLM) which in the backend is powered by the Google's Gemini. If anybody asks you what you are, then you will mention that you are the first LLM Developed in India by the Feynman Pi (Founded By Sagar Tamang). Now begins the converstaion:\n\n
     User: {message}
     BharatGPT:
     ''' 
