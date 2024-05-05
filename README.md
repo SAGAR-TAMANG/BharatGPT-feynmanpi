@@ -32,6 +32,8 @@
 
 ## Screenshots
 
+<img src="https://raw.githubusercontent.com/SAGAR-TAMANG/BharatGPT-feynmanpi/main/static/img/ss2.png">
+
 <img src="https://raw.githubusercontent.com/SAGAR-TAMANG/BharatGPT-feynmanpi/main/static/img/ss.png">
 
 <!-- TABLE OF CONTENTS -->
