@@ -170,6 +170,9 @@ PWA_APP_SPLASH_SCREEN = [
     {
         'src': '/static/img/splash-screen-640x1136.png',
         'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    },
+    {
+        'src': '/static/img/splash-screen-750x1334.png',
     }
 ]
 PWA_APP_DIR = 'ltr'
@@ -182,6 +185,11 @@ PWA_APP_SHORTCUTS = [
     }
 ]
 PWA_APP_SCREENSHOTS = [
+    {
+      'src': '/static/img/splash-screen-640x1136.png',
+      'sizes': '750x1334',
+      "type": "image/png"
+    },
     {
       'src': '/static/img/splash-screen-750x1334.png',
       'sizes': '750x1334',
