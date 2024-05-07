@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.feynmanpi.bharatgpt.twa",
+    "sha256_cert_fingerprints": ["FF:59:D7:04:56:E1:D3:59:C7:8E:CA:8E:E3:C2:71:C7:51:2C:BA:8B:13:3B:86:87:A6:87:E3:F4:44:FF:4B:52"]
+  }
+}]
