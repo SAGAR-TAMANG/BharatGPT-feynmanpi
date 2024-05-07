@@ -148,7 +148,7 @@ CSRF_TRUSTED_ORIGINS = [
 PWA_APP_NAME = 'BharatGPT'
 PWA_APP_DESCRIPTION = "BharatGPT by Feynman Pi | India's answer to the LLM Revolution."
 PWA_APP_THEME_COLOR = '#ffffff'
-PWA_APP_BACKGROUND_COLOR = '#f8f9fa'
+PWA_APP_BACKGROUND_COLOR = '#B4B4B4'
 PWA_APP_DISPLAY = 'standalone'
 PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'any'
@@ -157,13 +157,13 @@ PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
     {
         'src': '/static/img/android-icon.png',
-        'sizes': '240x240'
+        'sizes': '512x512'
     }
 ]
 PWA_APP_ICONS_APPLE = [
     {
         'src': '/static/img/android-icon.png',
-        'sizes': '240x240'
+        'sizes': '512x512'
     }
 ]
 PWA_APP_SPLASH_SCREEN = [
