@@ -1,4 +1,5 @@
 {% load static %}
+{% load pwa %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   {% block styles %}
   {% endblock %}
+  {% progressive_web_app_meta %}
 </head>
 <body>
 
