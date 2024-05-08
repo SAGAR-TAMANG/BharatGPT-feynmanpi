@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.feynmanpi.bharatgpt.twa",
-    "sha256_cert_fingerprints": ["FF:59:D7:04:56:E1:D3:59:C7:8E:CA:8E:E3:C2:71:C7:51:2C:BA:8B:13:3B:86:87:A6:87:E3:F4:44:FF:4B:52"]
+    "sha256_cert_fingerprints": ["42:7E:13:97:22:9A:A6:A0:12:39:A8:18:4C:DE:2B:B5:16:43:F6:30:A2:1A:D3:3D:81:35:F0:3B:12:65:E1:AF"]
   }
 }]
